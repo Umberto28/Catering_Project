@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+        <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+        <title>Dettagli Buffet</title>
+    </head>
+    <body>
+        <div>
+            <h4>Dettagli Buffet</h4>
+            <div>
+                <span th:text="${buffet.nome}">Carne</span>
+                <span th:text="${buffet.descrizione}">piatti di carne</span>
+            </div>
+        </div>
+            <footer><a href="/">Home</a></footer>
+    </body>
+</html>
