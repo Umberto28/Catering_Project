@@ -8,9 +8,13 @@
     <body>
         <div>
             <h4>Dettagli Buffet</h4>
+            <div th:object="${buffet}">
+                <span th:text="*{nome}">Carne</span>
+                <span th:text="*{descrizione}">piatti di carne</span>
+            </div>
             <div>
-                <span th:text="${buffet.nome}">Carne</span>
-                <span th:text="${buffet.descrizione}">piatti di carne</span>
+                <button type="button"><a th:href="@{/deleteBuffet(buffetId=${buffet.id})}">Elimina</a></button>
+                <button><a th:href="@{/showUpdateForm(buffetId=${buffet.id})}">Modifica</a></button>
             </div>
         </div>
             <footer><a href="/">Home</a></footer>

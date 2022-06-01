@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,14 @@ public class BuffetService {
 		return false;
 	}
 	
+	public List<Buffet> findAll(){
+		List<Buffet> elencoBuffet = new ArrayList<Buffet>();
+		for (Buffet b : buffetRepository.findAll()) {
+			elencoBuffet.add(b);
+		}
+		return elencoBuffet;
+	}
+	
 	@Transactional
 	public Buffet findById(Long id) {
 		return this.buffetRepository.findById(id).get();
@@ -31,8 +42,8 @@ public class BuffetService {
 	}
 	
 	@Transactional
-	public void rimuovi(Buffet buffet) {
-		this.buffetRepository.delete(buffet);
+	public void rimuovi(Long id) {
+		this.buffetRepository.deleteById(id);
 	}
 	
 	@Transactional
@@ -41,7 +52,7 @@ public class BuffetService {
 	}
 	
 	//metodi che richiamano la query nel repository
-	@Transactional
+	/* @Transactional
     public void modificaNome(Buffet b) {
         //prima modifichi nome con setNome()
         this.buffetRepository.modificaNomeApp(b.getNome(), b.getId());
@@ -51,5 +62,5 @@ public class BuffetService {
     public void modificaDescr(Buffet b) {
         //prima modifichi nome con setDescr()
         this.buffetRepository.modificaDescrApp(b.getDescr(), b.getId());
-    }
+    } */
 }

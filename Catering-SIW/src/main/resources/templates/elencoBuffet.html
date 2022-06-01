@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Elenco Buffet</title>
+	<link href="/style.css" rel="stylesheet">
+</head>
+<body>
+	<h4>Elenco buffet</h4>
+	<ul>
+	<li th:each="buffet : ${elencoBuffet}">
+		<a href="buffet.html" class ="link"
+			th:href="@{'/buffet' + '/' + ${buffet.id}}"
+			th:text="${buffet.nome} + ' ' + ${buffet.descrizione}">Paolo Rossi
+        </a>
+	</li>
+	</ul>
+</body>
+</html>

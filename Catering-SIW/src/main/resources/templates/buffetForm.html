@@ -6,19 +6,20 @@
         <title>Inserimento Buffet</title>
     </head>
     <body>
+        <h1>Aggiungi un buffet</h1>
         <form th:action="@{/buffet}" method="POST" th:object="${buffet}">
-            <div th:if="${#field.hasglobalErrors()}">
-                <p th:each="err : ${fields.globalErrors()}" th:text="${err}">Errore Globale</p>
+            <div th:if="${#fields.hasGlobalErrors()}">
+                <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore Globale</p>
             </div>
             <div><span>Nome: </span>
-                <span><input type="text" th:field="{nome}" /></span>
-                <span th:if="${#fields.hasErrors('nome')}" th:errors="{nome}"></span>
+                <span><input type="text" th:field="*{nome}" /></span>
+                <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
             </div>
             <div><span>Descrizione: </span>
-                <span><input type="text" th:field="{descrizione}" /></span>
-                <span th:if="${#fields.hasErrors('descrizione')}" th:errors="{descrizione}"></span>
+                <span><input type="text" th:field="*{descrizione}" /></span>
+                <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
             </div>
-            <div><button type="submit">Submit</button></div>
+            <div><button type="submit">Conferma</button></div>
         </form>
     </body>
 </html>

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.controller.validator.BuffetValidator;
 import com.example.demo.model.Buffet;
@@ -19,19 +23,29 @@ import com.example.demo.service.BuffetService;
 public class BuffetController {
 
 	@Autowired
-	BuffetService buffetService;
+	private BuffetService buffetService;
 	
 	@Autowired
-	BuffetValidator buffetValidator;
+	private BuffetValidator buffetValidator;
 	
 	@PostMapping("/buffet")
 	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
+		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			buffetService.inserisci(buffet);
-			model.addAttribute("buffet", model);
+			this.buffetService.inserisci(buffet);
+			model.addAttribute("buffet", buffetService.findById(buffet.getId()));
 			return "buffet.html";
 		}
-		return "buffetForm.html";
+		else {
+			return "buffetForm.html";
+		}
+	}
+	
+	@GetMapping("/elencoBuffet")
+	public String getElencoBuffet(Model model) {
+		List<Buffet> elencoBuffet = buffetService.findAll();
+		model.addAttribute("elencoBuffet", elencoBuffet);
+		return "elencoBuffet.html";
 	}
 	
 	@GetMapping("/buffet/{id}")
@@ -45,5 +59,19 @@ public class BuffetController {
 	public String getBuffetForm(Model model) {
 		model.addAttribute("buffet", new Buffet());
 		return "buffetForm.html";
+	}
+	
+	@GetMapping("/deleteBuffet")
+	public String deleteBuffet(@RequestParam Long buffetId) {
+		this.buffetService.rimuovi(buffetId);
+		return "redirect:/elencoBuffet";
+	}
+	
+	@GetMapping("/showUpdateForm")
+	public ModelAndView showUpdateForm(@RequestParam Long buffetId) {
+		ModelAndView mav = new ModelAndView("buffetForm");
+		Buffet buffet = this.buffetService.findById(buffetId);
+		mav.addObject("buffet", buffet);
+		return mav;
 	}
 }

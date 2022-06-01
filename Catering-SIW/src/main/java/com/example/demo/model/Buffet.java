@@ -17,13 +17,13 @@ public class Buffet {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	
 	@NotBlank
 	private String nome;
 	
 	@NotBlank
-	private String descr;
+	private String descrizione;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
 	@JoinColumn(name = "piattiDelBuffet")
@@ -49,11 +49,11 @@ public class Buffet {
 	}
 	
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 	
 	public String getNome() {
@@ -64,11 +64,11 @@ public class Buffet {
 		this.nome = nome;
 	}
 	
-	public String getDescr() {
-		return descr;
+	public String getDescrizione() {
+		return descrizione;
 	}
 	
-	public void setDescr(String descr) {
-		this.descr = descr;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 }

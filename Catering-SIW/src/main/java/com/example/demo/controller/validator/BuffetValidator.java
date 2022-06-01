@@ -17,7 +17,7 @@ public class BuffetValidator implements Validator{
 	@Override
 	public void validate(Object o, Errors errors) {
 		if(this.buffetService.alreadyExists((Buffet)o)) {
-			errors.reject("chef.duplicato");
+			errors.reject("buffet.duplicato");
 		}
 	}
 
