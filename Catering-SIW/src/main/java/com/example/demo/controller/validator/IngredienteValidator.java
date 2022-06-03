@@ -22,7 +22,7 @@ public class IngredienteValidator implements Validator{
 	@Override
 	public void validate(Object o, Errors errors) {
 		if(this.ingredienteService.alreadyExists((Ingrediente)o)) {
-			errors.reject("buffet.duplicato");
+			errors.reject("ingrediente.duplicato");
 		}
 	}
 	

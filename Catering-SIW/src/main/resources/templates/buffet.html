@@ -3,20 +3,35 @@
 	<head>
         <meta charset="UTF-8" />
         <link href="/css/my-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Dettagli Buffet</title>
     </head>
     <body>
+        <header th:replace="fragments/base.html :: navbar"></header>
         <div>
             <h4>Dettagli Buffet</h4>
-            <div th:object="${buffet}">
-                <span th:text="*{nome}">Carne</span>
-                <span th:text="*{descrizione}">piatti di carne</span>
+            <div th:if="${buffet}">
+                <div th:object="${buffet}">
+                    <span th:text="*{nome}">Carne</span>
+                    <span th:text="*{descrizione}">piatti di carne</span>
+                </div>
+                <div>
+                    <ul>
+                        <li th:each="piatto : ${elencoPiattiBuffet}">
+                            <a href="piatto.html" class ="link"
+                                th:href="@{'/piatto' + '/' + ${piatto.id}}"
+                                th:text="${piatto.nome} + ' ' + ${piatto.descrizione}">Carbonara
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <button type="button"><a th:href="@{/deleteBuffet(buffetId=${buffet.id})}">Elimina</a></button>
+                    <button><a th:href="@{/updateBuffet(buffetId=${buffet.id})}">Modifica</a></button>
+                </div>
             </div>
-            <div>
-                <button type="button"><a th:href="@{/deleteBuffet(buffetId=${buffet.id})}">Elimina</a></button>
-                <button><a th:href="@{/showUpdateForm(buffetId=${buffet.id})}">Modifica</a></button>
-            </div>
+            <div th:unless="${buffet}">Non esiste</div>
         </div>
-            <footer><a href="/">Home</a></footer>
+        <footer th:replace="fragments/base.html :: footer"></footer>
     </body>
 </html>

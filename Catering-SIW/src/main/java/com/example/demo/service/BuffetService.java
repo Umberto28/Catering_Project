@@ -25,12 +25,12 @@ public class BuffetService {
 	
 	public List<Buffet> findAll(){
 		List<Buffet> elencoBuffet = new ArrayList<Buffet>();
-		for (Buffet b : buffetRepository.findAll()) {
+		for (Buffet b : this.buffetRepository.findAll()) {
 			elencoBuffet.add(b);
 		}
 		return elencoBuffet;
 	}
-	
+		
 	@Transactional
 	public Buffet findById(Long id) {
 		return this.buffetRepository.findById(id).get();

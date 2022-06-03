@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Demo</title>
     </head>
     <body>
-        <div>
+        <header th:replace="fragments/base.html :: navbar"></header>
+        <div class="container">
             <h4>Operazioni</h4>
             <div>
                 <div><a th:href="@{/buffetForm}">Inserisci Buffet</a></div>
-                <div><a th:href="@{/elencoBuffet}">Buffet</a></div>
+                <div><a th:href="@{/elencoBuffet}">Elenco Buffet</a></div>
+            </div>
+            <hr>
+            <div>
+                <div><a th:href="@{/chefForm}">Inserisci Chef</a></div>
+                <div><a th:href="@{/elencoChef}">Elenco Chef</a></div>
+            </div>
+            <hr>
+            <div>
+                <div><a th:href="@{/piattoForm}">Inserisci Piatto</a></div>
+                <div><a th:href="@{/elencoPiatti}">Elenco Piatti</a></div>
+            </div>
+            <hr>
+            <div>
+                <div><a th:href="@{/ingredienteForm}">Inserisci Ingrediente</a></div>
+                <div><a th:href="@{/elencoIngredienti}">Elenco Ingredienti</a></div>
             </div>
         </div>
+        <footer th:replace="fragments/base.html :: footer"></footer>
     </body>
 </html>

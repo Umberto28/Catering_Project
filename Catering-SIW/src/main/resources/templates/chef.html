@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+        <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Dettagli Chef</title>
+    </head>
+    <body>
+        <header th:replace="fragments/base.html :: navbar"></header>
+        <div>
+            <h4>Dettagli Chef</h4>
+            <div th:if="${chef}">
+                <div th:object="${chef}">
+                    <span th:text="*{nome}">Paolo</span>
+                    <span th:text="*{cognome}">Rossi</span>
+                    <span th:text="*{nazionalita}">Italiana</span>
+                </div>
+                <div>
+                    <ul>
+                        <li th:each="buffet : ${elencoBuffetChef}">
+                            <a href="buffet.html" class ="link"
+                                th:href="@{'/buffet' + '/' + ${buffet.id}}"
+                                th:text="${buffet.nome} + ' ' + ${buffet.descrizione}">Buffet 1
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <button type="button"><a th:href="@{/deleteChef(chefId=${chef.id})}">Elimina</a></button>
+                    <button><a th:href="@{/updateChef(chefId=${chef.id})}">Modifica</a></button>
+                </div>
+            </div>
+            <div th:unless="${chef}">Non esiste</div>
+        </div>
+            <footer><a href="/">Home</a></footer>
+    </body>
+</html>

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Chef {
@@ -15,8 +16,12 @@ public class Chef {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
 	
+	@NotBlank
 	private String nome;
+	
+	@NotBlank
 	private String cognome;
+	
 	private String nazionalita;
 	
 	@OneToMany(mappedBy="chefDelBuffet")

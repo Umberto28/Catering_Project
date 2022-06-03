@@ -9,27 +9,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Piatto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	
+	@NotBlank
 	private String nome;
-	private String descr;
+	
+	@NotBlank
+	private String descrizione;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Ingrediente> ingredientiDelPiatto;
 	
 	
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 	
 	public String getNome() {
@@ -41,10 +45,26 @@ public class Piatto {
 	}
 	
 	public String getDescr() {
-		return descr;
+		return descrizione;
 	}
 	
-	public void setDescr(String descr) {
-		this.descr = descr;
+	public void setDescr(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public List<Ingrediente> getIngredientiDelPiatto() {
+		return ingredientiDelPiatto;
+	}
+
+	public void setIngredientiDelPiatto(List<Ingrediente> ingredientiDelPiatto) {
+		this.ingredientiDelPiatto = ingredientiDelPiatto;
 	}
 }
