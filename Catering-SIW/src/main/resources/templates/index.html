@@ -3,33 +3,128 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Demo</title>
+        <link rel="stylesheet" th:href="@{index.css}">
+        <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Catering Roma Tre</title>
     </head>
     <body>
+        <!-- NAVBAR SECTION -->
         <header th:replace="fragments/base.html :: navbar"></header>
-        <div class="container">
-            <h4>Operazioni</h4>
-            <div>
-                <div><a th:href="@{/buffetForm}">Inserisci Buffet</a></div>
-                <div><a th:href="@{/elencoBuffet}">Elenco Buffet</a></div>
-            </div>
-            <hr>
-            <div>
-                <div><a th:href="@{/chefForm}">Inserisci Chef</a></div>
-                <div><a th:href="@{/elencoChef}">Elenco Chef</a></div>
-            </div>
-            <hr>
-            <div>
-                <div><a th:href="@{/piattoForm}">Inserisci Piatto</a></div>
-                <div><a th:href="@{/elencoPiatti}">Elenco Piatti</a></div>
-            </div>
-            <hr>
-            <div>
-                <div><a th:href="@{/ingredienteForm}">Inserisci Ingrediente</a></div>
-                <div><a th:href="@{/elencoIngredienti}">Elenco Ingredienti</a></div>
+
+        <!-- TITLE SECTION -->
+        <div  class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img th:src="@{sfondoIndex.jpg}" class="d-block" height="500" width="1920" alt="home image">
+                    <div id="home-section" class="carousel-caption">
+                        <p> <span id="title" class="color-titles">Catering Roma Tre</span>
+                        <br>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                        <br>
+                        Deleniti ducimus earum illo cum vitae consequatur.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- CHEF SECTION -->
+        <div class="d-flex flex-row align-items-center justify-content-around m-5">
+            <div class="m-4 p-3 border-radius" style="text-align-last: left;border: 4px dashed rgb(236, 202, 138);">
+                <p>
+                    <span class="color-titles section-title">I nostri Chef</span>
+                    <br>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing
+                    <br>
+                    elit. Numquam, alias!
+                    <br>
+                    <br>
+                    <a class="color-titles" th:href="@{/elencoChef}">Vedi tutti gli Chef ></a>
+                </p>
+            </div>
+            <div class="card bg-dark m-5" style="width: 17rem;">
+                <img th:src="@{chef1.jpg}" class="card-img-top" alt="chef 1">
+                <div class="card-body">
+                  <h5 class="card-title color-titles">Chef 1</h5>
+                  <p class="card-text" style="color: white;">Some quick example text to build on the card title.</p>
+                  <button type="button" class="btn btn-warning">Dettagli</button>
+                </div>
+            </div>
+            <div class="card bg-dark m-5" style="width: 17rem;">
+                <img th:src="@{chef2.jpg}" class="card-img-top" alt="chef 2">
+                <div class="card-body">
+                  <h5 class="card-title color-titles">Chef 2</h5>
+                  <p class="card-text" style="color: white;">Some quick example text to build on the card title.</p>
+                  <button type="button" class="btn btn-warning">Dettagli</button>
+                </div>
+            </div>
+            <div class="card bg-dark m-5" style="width: 17rem;">
+                <img th:src="@{chef3.jpg}" class="card-img-top" alt="chef 3">
+                <div class="card-body">
+                  <h5 class="card-title color-titles">Chef 3</h5>
+                  <p class="card-text" style="color: white;">Some quick example text to build on the card title.</p>
+                  <button type="button" class="btn btn-warning">Dettagli</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BUFFET SECTION -->
+        <div class="bg-dark">
+            <div class="d-flex flex-row align-items-center justify-content-around m-5">
+                <div class="card bg-dark text-white m-5 border-radius" style="max-width: 530px;">
+                    <img th:src="@{buffet1.jpg}" class="card-img" alt="Buffet Example">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <div class="bgBlur p-2 border-radius">
+                            <h5 class="card-title color-titles">Buffet</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-5 p-3 border-radius" style="text-align-last: right;border: 4px dashed rgb(236, 202, 138);">
+                    <p style="color: white;">
+                        <span class="section-title color-titles">I Buffet degli Chef</span>
+                        <br>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quod 
+                        <br>
+                        quos animi consequatur facilis obcaecati quisquam quam ab maiores!
+                        <br>
+                        <br>
+                        <a th:href="@{/elencoBuffet}" class="color-titles">Vedi tutti i Buffet ></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- INGREDIENT SECTION-->
+        <div class="d-flex flex-row align-items-center justify-content-around m-4">
+            <div class="d-flex flex-column align-items-center justify-content-center m-3">
+                <img th:src="@{ingrediente1.jpg}" alt="Ingrediente 1" class="rounded-circle m-2" style="max-width: 300px;">
+                <img th:src="@{ingrediente2.jpg}" alt="Ingrediente 2" class="rounded-circle m-2" style="max-width: 300px;">
+            </div>
+            <div class="m-4 p-3 border-radius" style="text-align-last: center;border: 4px dashed rgb(236, 202, 138);">
+                <p>
+                    <span class="section-title color-titles">I nostri Prodotti</span>
+                    <br>
+                    Lorem ipsum dolor sit amet consectetur adipisicing  
+                    <br>
+                    elit. Sint voluptas quod
+                    quos animi consequatur facilis obcaecati 
+                    <br>
+                    quisquam quam ab maiores!
+                    <br>
+                    <br>
+                    <a th:href="@{/elencoPiatti}" class="color-titles">Vedi tutti i piatti ></a>
+                    <br>
+                    <a th:href="@{/elencoBuffet}" class="color-titles">Vedi tutti gli ingredienti ></a>
+                </p>
+            </div>
+            <div class="d-flex flex-column align-items-center justify-content-center m-3">
+                <img th:src="@{ingrediente3.jpg}" alt="Ingrediente 3" class="rounded-circle m-2" style="max-width: 300px;">
+                <img th:src="@{ingrediente4.jpg}" alt="Ingrediente 4" class="rounded-circle m-2" style="max-width: 300px;">
+            </div>
+        </div>
+
+        <!-- FOOTER SECTION -->
         <footer th:replace="fragments/base.html :: footer"></footer>
     </body>
 </html>
