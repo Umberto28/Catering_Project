@@ -37,6 +37,11 @@ public class BuffetService {
 	}
 	
 	@Transactional
+	public Buffet findByNome(String nome) {
+		return this.buffetRepository.findByNome(nome);
+	}
+	
+	@Transactional
 	public Buffet inserisci(Buffet buffet) {
 		return this.buffetRepository.save(buffet);
 	}
