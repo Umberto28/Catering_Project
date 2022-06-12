@@ -8,37 +8,40 @@
         <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
-        <header th:fragment="navbar">
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top d-flex flex-row justify-content-between" style="opacity: 0.95;">
-                <a id="homeTitle" class="navbar-brand text-light" th:href="@{/}"> <span style="font-family: 'Lobster Two'; font-size: 35px; color: rgb(235, 183, 87);">Catering</span></a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav">
-                    <li class="nav-item">
-                      <a class="nav-link text-light" th:href="@{/elencoBuffet}">Buffet</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-light" th:href="@{/elencoChef}">Chef</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-light" th:href="@{/elencoPiatti}">Piatti</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-light" th:href="@{/elencoIngredienti}">Ingredienti</a>
-                    </li>
-                  </ul>
-                </div>
-                <button class="btn" type="button" style="background-color: rgb(235, 183, 87);">Sign Up | Login</button>
-            </nav>
-          </header>
-          <footer id="main-footer" class="bg-dark sticky-bottom" th:fragment="footer">
-            <div class="container">
-              <div class="row">
-                <div class="col text-light text-center py-3">
-                  <h3>Catering Roma Tre</h3>
-                  <p>Copyright &copy; 2022</p>
-                </div>
+      <!-- NAVBAR -->
+      <header th:fragment="navbar">
+          <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top d-flex flex-row justify-content-between" style="opacity: 0.95;">
+            <a id="homeTitle" class="navbar-brand text-light" th:href="@{/}"> <span style="font-family: 'Lobster Two'; font-size: 35px; color: rgb(235, 183, 87);">Catering</span></a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-light" th:href="@{/elencoBuffet}">Buffet</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" th:href="@{/elencoChef}">Chef</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" th:href="@{/elencoPiatti}">Piatti</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" th:href="@{/elencoIngredienti}">Ingredienti</a>
+                </li>
+              </ul>
+            </div>
+            <a class="btn text-dark" type="login" th:href="@{/loginForm}" style="background-color: rgb(235, 183, 87);">Sign Up | Login</a>
+          </nav>
+        </header>
+
+        <!-- FOOTER -->
+        <footer id="main-footer" class="bg-dark sticky-bottom" th:fragment="footer">
+          <div class="container">
+            <div class="row">
+              <div class="col text-light text-center py-3">
+                <h3>Catering Roma Tre</h3>
+                <p>Copyright &copy; 2022</p>
               </div>
             </div>
-          </footer>
+          </div>
+        </footer>
     </body>
 </html>

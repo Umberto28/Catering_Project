@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Elenco Ingredienti</title>
-		<link rel="stylesheet" th:href="@{/css/elenco.css}">
+		<link rel="stylesheet" th:href="@{/css/index2.css}">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
 		<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	</head>
@@ -16,7 +16,7 @@
 				<div class="carousel-item active">
 					<img th:src="@{/images/sfondoElencoIngredienti.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
 					<div id="home-section" class="carousel-caption">
-						<p> <span id="title" class="color-titles">Ingrediente</span>
+						<p> <span id="title" class="colorTitles">Ingredienti</span>
 						<br>
 						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 						<br>
@@ -30,7 +30,7 @@
 		<!-- SUBTITLE SECTION -->
 		<div class="m-5 border-radius" style="border: 4px dashed rgb(235, 183, 87);">
 			<div class="p-3 d-flex flex-row align-items-center justify-content-between" >
-				<div class="color-titles section-title">Elenco ingredienti</div>
+				<div class="colorTitles section-title">Elenco ingredienti</div>
 				<a th:href="@{/ingredienteForm}" class="btn text-dark">Aggiungi ingrediente</a>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 				</a> -->
 				<div class="card m-5" style="width: 18rem;background-color: rgb(112, 102, 80);">
 					<div class="card-header d-flex flex-row justify-content-between align-items-center mb-3">
-						<h4 class="card-title color-titles" th:text="${ingrediente.nome}">Ingredienti</h4>
+						<h4 class="card-title colorTitles" th:text="${ingrediente.nome}">Ingredienti</h4>
 						<img th:src="@{/images/ingredientiIcon4.png}" alt="Ingrediente icon" class="rounded-circle" style="background-color: rgb(235, 183, 87);">
 					</div>
 					<div class="card-body text-white">

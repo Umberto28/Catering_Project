@@ -65,6 +65,7 @@ public class BuffetController {
 		Buffet buffet = this.buffetService.findById(id);
 		model.addAttribute("buffet", buffet);
 		model.addAttribute("elencoPiattiBuffet", buffet.getListaPiatti());
+		model.addAttribute("chef", buffet.getChefDelBuffet());
 		return "buffet.html";
 	}
 	

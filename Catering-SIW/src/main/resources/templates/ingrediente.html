@@ -2,28 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
         <meta charset="UTF-8" />
-        <link href="/css/my-style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/index2.css}">
+        <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Dettagli Ingrediente</title>
     </head>
     <body>
+        <!-- NAVBAR SECTION -->
         <header th:replace="fragments/base.html :: navbar"></header>
-        <div>
-            <h4>Dettagli Ingrediente</h4>
-            <div th:if="${ingrediente}">
-                <div th:object="${ingrediente}">
-                    <span th:text="*{nome}">Basilico</span>
-                    <span th:text="*{descrizione}">Spezia</span>
-                    <span th:text="*{origine}">Italia</span>
-                </div>
+        
+        <!-- TITLE SECTION -->
+		<div  class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img th:src="@{/images/sfondoElencoIngredienti.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
+					<div id="home-section" class="carousel-caption">
+						<p> <span id="title" class="colorTitles">Ingredienti</span>
+						<br>
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+						<br>
+						Deleniti ducimus earum illo cum vitae consequatur.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <!-- SUBTITLE SECTION -->
+		<div class="m-5 border-radius" style="border: 4px dashed rgb(235, 183, 87);border-radius: 10px;">
+			<div class="p-3 d-flex flex-row align-items-center justify-content-between">
+				<div class="colorTitles section-title">Dettagli Ingrediente</div>
                 <div>
-                    <button type="button"><a th:href="@{/deleteIngrediente(ingredienteId=${ingrediente.id})}">Elimina</a></button>
-                    <button><a th:href="@{/updateIngrediente(ingredienteId=${ingrediente.id})}">Modifica</a></button>
+                    <a th:href="@{/updateIngrediente(ingredienteId=${ingrediente.id})}" class="btn btn-primary"><img th:src="@{/images/modificaIcon.png}" alt="Modifica"></a>
+                    <a th:href="@{/deleteIngrediente(ingredienteId=${ingrediente.id})}" class="btn btn-danger"><img th:src="@{/images/deleteIcon.png}" alt="Delete"></a>
+                </div>
+			</div>
+		</div>
+
+        <!-- DESCRIPTION SECTION -->
+        <div class="m-5">
+            <div class="row">
+                <div class="col-9 mx-auto">
+                    <div class="card mt-2 mx-auto p-4" th:if="${ingrediente}" style="background-color: rgb(112, 102, 80);">
+                        <div class="card-body">
+                            <div class="d-flex flex-row align-items-start justify-content-between" th:object="${ingrediente}">
+                                <div class="text-white col-8">
+                                    <h4 class="colorTitles">Nome: </h4><h4 th:text="*{nome}">Ingrediente</h4>
+                                    <br>
+                                    <h4 class="colorTitles">Descrizione: </h4><h4 th:text="*{descrizione}">sale</h4>
+                                    <br>
+                                    <h4 class="colorTitles">Origine: </h4><h4 th:text="*{origine}">Italiano</h4>
+                                </div>
+                                <img class="rounded-circle" style="background-color: rgb(235, 183, 87);" th:src="@{/images/ingredientiIcon5.png}" alt="Ingrediente">
+                            </div>
+                        </div>   
+                    </div>
+                    <h4 class="mx-auto" th:unless="${ingrediente}">Non esiste</h4>
                 </div>
             </div>
-            <div th:unless="${ingrediente}">Non esiste</div>
         </div>
-            <footer><a href="/">Home</a></footer>
+
+        <!-- FOOTER SECTION -->
+        <footer th:replace="fragments/base.html :: footer"></footer>
+
     </body>
 </html>

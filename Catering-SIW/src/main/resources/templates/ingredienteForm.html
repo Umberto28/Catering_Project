@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" th:href="@{/css/buffetForm2.css}">
+        <link rel="stylesheet" th:href="@{/css/index2.css}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
         <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Inserimento Ingrediente</title>
@@ -17,7 +17,7 @@
 				<div class="carousel-item active">
 					<img th:src="@{/images/sfondoElencoIngredienti.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
 					<div id="home-section" class="carousel-caption">
-						<p> <span id="title" class="color-titles">Ingredienti</span>
+						<p> <span id="title" class="colorTitles">Ingredienti</span>
 						<br>
 						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 						<br>
@@ -31,7 +31,7 @@
         <!-- SUBTITLE SECTION -->
 		<div class="m-5 border-radius" style="border: 4px dashed rgb(235, 183, 87);border-radius: 10px;">
 			<div class="p-3 d-flex flex-row align-items-center justify-content-center">
-				<div class="color-titles section-title">Inserisci ingrediente</div>
+				<div class="colorTitles section-title">Inserisci ingrediente</div>
 			</div>
 		</div>
 
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-md-12">
-                                                <input type="submit" style="background-color: rgb(235, 183, 87);" class="btn btn-send pt-2 btn-block text-dark" value="Conferma">
+                                                <button type="submit" class="btn btn-send pt-2 btn-block text-dark"><img th:src="@{/images/confermaIcon.png}" alt="Conferma"></button>
                                             </div>
                                         </div>
                                     </div>
