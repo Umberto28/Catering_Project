@@ -41,10 +41,6 @@
 		<!-- LIST SECTION -->
 		<div class="d-flex flex-wrap justify-content-around">
 			<div th:each="buffet : ${elencoBuffet}">
-				<!-- <a href="buffet.html" class ="link"
-					th:href="@{'/buffet' + '/' + ${buffet.id}}"
-					th:text="${buffet.nome} + ' ' + ${buffet.descrizione}">Paolo Rossi
-				</a> -->
 				<div class="card m-5" style="width: 18rem;background-color: rgb(112, 102, 80);">
 					<div class="card-header d-flex flex-row justify-content-between align-items-center mb-3">
 						<h4 class="card-title colorTitles" th:text="${buffet.nome}">Buffet</h4>

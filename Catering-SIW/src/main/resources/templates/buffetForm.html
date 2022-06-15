@@ -50,16 +50,30 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="form_name">Nome </label>
+                                                    <label for="form_name">Nome</label>
                                                     <input id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci il nome del buffet" required="required" th:field="*{nome}" >
                                                     <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="message">Descrizione </label>
+                                                    <label for="message">Descrizione</label>
                                                     <textarea id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci la descrizione del buffet" required="required" th:field="*{descrizione}"></textarea>
                                                     <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <div class="form-group">
+                                                <label for="form_name">Seleziona chef</label>
+                                                <div th:if="${!chefDisponibili.empty}">
+                                                    <select class="form-select" aria-label="Default select example" th:field="*{chefDelBuffet}">
+                                                        <option th:each="chef : ${chefDisponibili}" th:value="${chef.id}"><span
+                                                                th:text="${chef.nome}">Nome chef</span></option>
+                                                    </select>
+                                                </div>
+                                                <div th:unless="${!chefDisponibili.empty}">
+                                                    <div class="notification p-3 is-danger">Nessuno chef disponibile!</div>
                                                 </div>
                                             </div>
                                         </div>

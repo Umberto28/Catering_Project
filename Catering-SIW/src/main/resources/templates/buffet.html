@@ -53,28 +53,28 @@
                                 </div>
                                 <img class="rounded-circle" style="background-color: rgb(235, 183, 87);" th:src="@{/images/buffetIcon5.png}" alt="Buffet">
                             </div>
-                            <div class="card bg-light col-6 my-5 ml-3 p-3">
+                            <div class="card bg-light col-6 my-5 ml-3">
                                 <div class="card-body d-flex flex-row align-items-center justify-content-between" th:if="${chef}" th:object="${chef}">
-                                    <div class="col-6 colorTitles" th:text="'Chef ' + *{nome}">Chef</div>
-                                    <a href="chef.html" class ="link btn btn-block"
+                                    <div><h4 class="colorTitles d-inline">Chef: </h4><h4 class="d-inline" th:text="*{nome}">Chef</h4></div>
+                                    <a href="chef.html" class ="link btn"
                                     th:href="@{'/chef' + '/' + ${chef.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
                                 </div>
-                                <h4 th:unless="${chef}">Nessuno chef assegnato</h4>
+                                <h4 th:unless="${chef}" class="p-3">Nessuno chef assegnato</h4>
                             </div>
-                            <div th:if="@{elencoPiattiBuffet}" class="d-flex flex-row align-items-start justify-content-between p-3">
+                            <!--<div th:if="@{elencoPiattiBuffet}" class="p-3">
                                 <h4 class="colorTitles">Lista piatti: </h4>
                                 <div class="d-flex flex-wrap justify-content-start">
                                     <div th:each="piatto : ${elencoPiattiBuffet}">
-                                        <div class="card bg-ligth" style="width: 15rem;">
-                                            <div class="card-body d-flex flex-roe justify-content-between">
-                                                <p th:text="${piatto.nome}">Nome piatto</p>
+                                        <div class="card bg-ligth m-3" style="width: 15rem;">
+                                            <div class="card-body d-flex flex-row align-items-center justify-content-between">
+                                                <h5 th:text="${piatto.nome}">Nome piatto</h5>
                                                 <a href="piatto.html" class ="link btn"
                                                 th:href="@{'/piatto' + '/' + ${piatto.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <h4 th:unless="@{elencoPiattiBuffet}">Non ci sono piatti assegnati</h4>
                         </div>   
                     </div>

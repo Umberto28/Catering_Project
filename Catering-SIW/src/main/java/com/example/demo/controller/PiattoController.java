@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.controller.validator.PiattoValidator;
 import com.example.demo.model.Piatto;
+import com.example.demo.service.BuffetService;
+import com.example.demo.service.IngredienteService;
 import com.example.demo.service.PiattoService;
 
 @Controller
@@ -23,6 +25,10 @@ public class PiattoController {
 
 	@Autowired
 	PiattoService piattoService;
+	@Autowired
+	BuffetService buffetService;
+	@Autowired
+	IngredienteService ingredienteService;
 	
 	@Autowired
 	PiattoValidator piattoValidator;
@@ -31,8 +37,10 @@ public class PiattoController {
 	public String addPiatto(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			//piatto.getBuffet().getListaPiatti().add(piatto);
 			this.piattoService.inserisci(piatto);
-			model.addAttribute("piatto", this.piattoService.findById(piatto.getId()));
+			model.addAttribute("piatto", piatto);
+			model.addAttribute("buffet", piatto.getBuffet());
 			return "piatto.html";
 		}
 		else {
@@ -40,12 +48,13 @@ public class PiattoController {
 		}
 	}
 	
-	@PostMapping("/piattoUpdate")
-	public String updatePiattoForm(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
+	@PostMapping("/piattoUpdate/{id}")
+	public String updatePiatto(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.piattoService.inserisci(piatto);
-			model.addAttribute("piatto", this.piattoService.findById(piatto.getId()));
+			model.addAttribute("piatto", piatto);
+			model.addAttribute("buffet", piatto.getBuffet());
 			return "piatto.html";
 		}
 		else {
@@ -64,13 +73,15 @@ public class PiattoController {
 	public String getPiatto(@PathVariable("id") Long id, Model model) {
 		Piatto piatto = this.piattoService.findById(id);
 		model.addAttribute("piatto", piatto);
-		model.addAttribute("elencoIngredientiPiatto", piatto.getIngredientiDelPiatto());
+		model.addAttribute("buffet", piatto.getBuffet());
 		return "piatto.html";
 	}
 	
 	@GetMapping("/piattoForm")
 	public String getPiattoForm(Model model) {
 		model.addAttribute("piatto", new Piatto());
+		model.addAttribute("buffetDisponibili", this.buffetService.findAll());
+		model.addAttribute("ingredientiDisponibili", this.ingredienteService.findAll());
 		return "piattoForm.html";
 	}
 	
@@ -81,9 +92,11 @@ public class PiattoController {
 	}
 	
 	@GetMapping("/updatePiatto")
-	public String updatePiatto(@RequestParam Long piattoId, Model model) {
+	public String updatePiattoForm(@RequestParam Long piattoId, Model model) {
 		System.out.println("L'id del piatto: " + piattoId);
 		model.addAttribute("piatto", this.piattoService.findById(piattoId));
+		model.addAttribute("buffetDisponibili", this.buffetService.findAll());
+		model.addAttribute("ingredientiDisponibili", this.ingredienteService.findAll());
 		return "piattoUpdateForm.html";
 	}
 }

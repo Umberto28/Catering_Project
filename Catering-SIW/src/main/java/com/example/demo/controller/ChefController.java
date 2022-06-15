@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.controller.validator.ChefValidator;
 import com.example.demo.model.Chef;
+import com.example.demo.service.BuffetService;
 import com.example.demo.service.ChefService;
 
 @Controller
@@ -23,6 +24,8 @@ public class ChefController {
 
 	@Autowired
 	ChefService chefService;
+	@Autowired
+	BuffetService buffetService;
 	
 	@Autowired
 	ChefValidator chefValidator;
@@ -32,7 +35,7 @@ public class ChefController {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.chefService.inserisci(chef);
-			model.addAttribute("chef", this.chefService.findById(chef.getId()));
+			model.addAttribute("chef", chef);
 			return "chef.html";
 		}
 		else {
@@ -40,12 +43,12 @@ public class ChefController {
 		}
 	}
 	
-	@PostMapping("/chefUpdate")
+	@PostMapping("/chefUpdate/{id}")
 	public String updateChefForm(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model) {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.chefService.inserisci(chef);
-			model.addAttribute("chef", this.chefService.findById(chef.getId()));
+			model.addAttribute("chef", chef);
 			return "chef.html";
 		}
 		else {

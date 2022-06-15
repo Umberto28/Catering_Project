@@ -69,6 +69,21 @@
                                                     <span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
                                                 </div>
                                             </div>
+                                            <!--<div class="col-12 mt-3">
+                                                <div class="form-group">
+                                                    <label for="message">Buffet Disponibili</label>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div th:each="buffet : ${buffetDisponibili}">
+                                                            <div class="card bgCatering m-3">
+                                                                <div class="card-body d-flex flex-row align-items-center justify-content-between">
+                                                                    <h5 th:text="${buffet.nome}" class="mr-4">Buffet</h5>
+                                                                    <img th:src="@{/images/addIcon2.png}" alt="Add" class="btn">
+                                                                </div>
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                </div>
+                                            </div>-->
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-md-12">

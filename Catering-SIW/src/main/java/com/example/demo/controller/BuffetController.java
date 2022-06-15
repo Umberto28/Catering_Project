@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.controller.validator.BuffetValidator;
 import com.example.demo.model.Buffet;
 import com.example.demo.service.BuffetService;
+import com.example.demo.service.ChefService;
 
 @Controller
 public class BuffetController {
 
 	@Autowired
 	private BuffetService buffetService;
+	@Autowired
+	private ChefService chefService;
 	
 	@Autowired
 	private BuffetValidator buffetValidator;
@@ -31,8 +34,9 @@ public class BuffetController {
 	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			//buffet.getChefDelBuffet().getBuffetDelloChef().add(buffet);
 			this.buffetService.inserisci(buffet);
-			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
+			model.addAttribute("buffet", buffet);
 			return "buffet.html";
 		}
 		else {
@@ -40,12 +44,12 @@ public class BuffetController {
 		}
 	}
 	
-	@PostMapping("/buffetUpdate")
+	@PostMapping("/buffetUpdate/{id}")
 	public String updateBuffetForm(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.buffetService.inserisci(buffet);
-			model.addAttribute("buffet", this.buffetService.findById(buffet.getId()));
+			model.addAttribute("buffet", buffet);
 			return "buffet.html";
 		}
 		else {
@@ -72,6 +76,7 @@ public class BuffetController {
 	@GetMapping("/buffetForm")
 	public String getBuffetForm(Model model) {
 		model.addAttribute("buffet", new Buffet());
+		model.addAttribute("chefDisponibili", this.chefService.findAll());
 		return "buffetForm.html";
 	}
 	
@@ -85,6 +90,7 @@ public class BuffetController {
 	public String updateBuffet(@RequestParam Long buffetId, Model model) {
 		System.out.println("L'id del buffet: " + buffetId);
 		model.addAttribute("buffet", this.buffetService.findById(buffetId));
+		model.addAttribute("chefDisponibili", this.chefService.findAll());
 		return "buffetUpdateForm.html";
 	}
 }

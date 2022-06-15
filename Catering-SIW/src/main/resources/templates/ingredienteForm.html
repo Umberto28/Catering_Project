@@ -70,6 +70,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--<div class="col-12 mt-3">
+                                            <div class="form-group">
+                                                <label for="form_name">Seleziona piatto</label>
+                                                <div th:if="${piattiDisponibili}">
+                                                    <select class="form-select" aria-label="Default select example" th:field="*{piatti}">
+                                                        <option th:each="piatto : ${piattiDisponibili}" th:value="${piatto.id}"><span
+                                                                th:text="${piatto.nome}">Nome piatto</span></option>
+                                                    </select>
+                                                </div>
+                                                <div th:unless="${piattiDisponibili}">
+                                                    <div class="notification p-3 is-danger">Nessun piatto disponibile!</div>
+                                                </div>
+                                            </div>
+                                        </div>-->
                                         <div class="row mt-4">
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-send pt-2 btn-block text-dark"><img th:src="@{/images/confermaIcon.png}" alt="Conferma"></button>

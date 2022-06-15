@@ -42,7 +42,7 @@
                     <div class="card mt-2 mx-auto p-4 bg-light">
                         <div class="card-body bg-light">
                             <div class = "container">
-                                <form id="contact-form" role="form" th:action="@{/piatto}" method="POST" th:object="${piatto}">
+                                <form id="contact-form" th:action="@{/piatto}" method="POST" th:object="${piatto}">
                                     <div th:if="${#fields.hasGlobalErrors()}">
                                         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore Globale</p>
                                     </div>
@@ -51,15 +51,40 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="form_name">Nome </label>
-                                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci il nome del buffet" required="required" th:field="*{nome}" >
+                                                    <input id="form_name" type="text" name="nome" class="form-control" placeholder="Inserisci il nome del piatto" required="required" th:field="*{nome}"/>
                                                     <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="message">Descrizione </label>
-                                                    <textarea id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci la descrizione del buffet" required="required" th:field="*{descrizione}"></textarea>
+                                                    <textarea id="form_name" type="text" name="descrizione" class="form-control" placeholder="Inserisci la descrizione del piatto" required="required" th:field="*{descrizione}"></textarea>
                                                     <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                <div class="form-group">
+                                                    <label for="form_name">Seleziona buffet</label>
+                                                    <div th:if="${buffetDisponibili}">
+                                                        <select class="form-select" aria-label="Default select example" th:field="*{buffet}">
+                                                            <option th:each="buffet : ${buffetDisponibili}" th:value="${buffet.id}"><span
+                                                                    th:text="${buffet.nome}">Nome piatto</span></option>
+                                                        </select>
+                                                    </div>
+                                                    <div th:unless="${buffetDisponibili}">
+                                                        <div class="notification p-3 is-danger">Nessun piatto disponibile!</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                <div class="form-group">
+                                                    <label for="form_name">Seleziona ingredienti</label>
+                                                    <br>
+                                                    <th:block th:each="ingrediente : ${ingredientiDisponibili}">
+                                                        <div>
+                                                            <input class="form-control m-2" name="ingredienti" type="checkbox" th:field="*{ingredientiDelPiatto}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}" />
+                                                        </div>
+                                                    </th:block>
                                                 </div>
                                             </div>
                                         </div>

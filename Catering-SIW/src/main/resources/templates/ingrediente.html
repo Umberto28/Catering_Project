@@ -55,6 +55,19 @@
                                 </div>
                                 <img class="rounded-circle" style="background-color: rgb(235, 183, 87);" th:src="@{/images/ingredientiIcon5.png}" alt="Ingrediente">
                             </div>
+                            <div th:if="${piatti}">
+                                <div th:each="piatto : ${piatti}" class="d-flex flex-wrap">
+                                    <div class="card bg-light col-6 my-5 ml-3">
+                                        <div class="card-body d-flex flex-row align-items-center justify-content-between"  th:object="${piatto}">
+                                            <div><h4 class="colorTitles d-inline">Piatto: </h4><h4 class="d-inline" th:text="*{nome}">Piatto</h4>
+                                            </div>
+                                            <a href="piatto.html" class ="link btn"
+                                            th:href="@{'/piatto' + '/' + ${piatto.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:unless="${piatti}">Non ci sono piatti assegnati</div>            
                         </div>   
                     </div>
                     <h4 class="mx-auto" th:unless="${ingrediente}">Non esiste</h4>

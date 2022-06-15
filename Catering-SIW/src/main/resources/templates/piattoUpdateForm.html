@@ -2,27 +2,97 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <link href="/css/my-style.css" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/index2.css}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Modifica Piatto</title>
     </head>
     <body>
+        <!-- NAVBAR SECTION -->
         <header th:replace="fragments/base.html :: navbar"></header>
-        <h1>Modifica piatto</h1>
-        <form th:action="@{/piattoUpdate}" method="POST" th:object="${piatto}">
-            <div th:if="${#fields.hasGlobalErrors()}">
-                <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore Globale</p>
+
+        <!-- TITLE SECTION -->
+		<div  class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img th:src="@{/images/sfondoElencoPiatti.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
+					<div id="home-section" class="carousel-caption">
+						<p> <span id="title" class="colorTitles">Piatti</span>
+						<br>
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+						<br>
+						Deleniti ducimus earum illo cum vitae consequatur.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <!-- SUBTITLE SECTION -->
+		<div class="m-5 border-radius" style="border: 4px dashed rgb(235, 183, 87);border-radius: 10px;">
+			<div class="p-3 d-flex flex-row align-items-center justify-content-center">
+				<div class="colorTitles section-title">Modifica piatto</div>
+			</div>
+		</div>
+
+        <!-- FORM SECTION -->
+        <div class="m-5">
+            <div class="row">
+                <div class="col-lg-7 mx-auto">
+                    <div class="card mt-2 mx-auto p-4 bg-light">
+                        <div class="card-body bg-light">
+                            <div class = "container">
+                                <form id="contact-form" role="form" th:action="@{'/piattoUpdate' + '/' + ${piatto.id}}" method="POST" th:object="${piatto}">
+                                    <div th:if="${#fields.hasGlobalErrors()}">
+                                        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore Globale</p>
+                                    </div>
+                                    <div class="controls">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="form_name">Nome </label>
+                                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci il nome del buffet" required="required" th:field="*{nome}" >
+                                                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="message">Descrizione </label>
+                                                    <textarea id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci la descrizione del buffet" required="required" th:field="*{descrizione}"></textarea>
+                                                    <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <div class="form-group">
+                                                <label for="form_name">Seleziona buffet</label>
+                                                <div th:if="${!buffetDisponibili.empty}">
+                                                    <select class="form-select" aria-label="Default select example" th:field="*{buffet}">
+                                                        <option th:each="buffet : ${buffetDisponibili}" th:value="${buffet.id}"><span
+                                                                    th:text="${buffet.nome}">Nome buffet</span></option>
+                                                    </select>
+                                                </div>
+                                                <div th:unless="${!buffetDisponibili.empty}">
+                                                    <div class="notification p-3 is-danger">Nessun buffet disponibile!</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-send pt-2 btn-block text-dark"><img th:src="@{/images/confermaIcon.png}" alt="Conferma"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div><span>Nome: </span>
-                <span><input type="text" th:field="*{nome}" /></span>
-                <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-            </div>
-            <div><span>Descrizione: </span>
-                <span><input type="text" th:field="*{descrizione}" /></span>
-                <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
-            </div>
-            <div><button type="submit">Conferma</button></div>
-        </form>
+        </div>
+
+        <!-- FOOTER SECTION -->
+        <footer th:replace="fragments/base.html :: footer"></footer>
+
     </body>
 </html>

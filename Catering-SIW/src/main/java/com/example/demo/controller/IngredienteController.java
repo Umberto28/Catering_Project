@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.controller.validator.IngredienteValidator;
 import com.example.demo.model.Ingrediente;
 import com.example.demo.service.IngredienteService;
+import com.example.demo.service.PiattoService;
 
 @Controller
 public class IngredienteController {
 
 	@Autowired
 	IngredienteService ingredienteService;
+	@Autowired
+	PiattoService piattoService;
 	
 	@Autowired
 	IngredienteValidator ingredienteValidator;
@@ -31,8 +34,9 @@ public class IngredienteController {
 	public String addIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult, Model model) {
 		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			//ingrediente.getPiatto().getIngredientiDelPiatto().add(ingrediente);
 			this.ingredienteService.inserisci(ingrediente);
-			model.addAttribute("ingrediente", this.ingredienteService.findById(ingrediente.getId()));
+			model.addAttribute("ingrediente", ingrediente);
 			return "ingrediente.html";
 		}
 		else {
@@ -40,12 +44,12 @@ public class IngredienteController {
 		}
 	}
 	
-	@PostMapping("/ingredienteUpdate")
+	@PostMapping("/ingredienteUpdate/{id}")
 	public String updateIngredienteForm(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult, Model model) {
 		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.ingredienteService.inserisci(ingrediente);
-			model.addAttribute("ingrediente", this.ingredienteService.findById(ingrediente.getId()));
+			model.addAttribute("ingrediente", ingrediente);
 			return "ingrediente.html";
 		}
 		else {
@@ -64,12 +68,14 @@ public class IngredienteController {
 	public String getIngrediente(@PathVariable("id") Long id, Model model) {
 		Ingrediente ingrediente = this.ingredienteService.findById(id);
 		model.addAttribute("ingrediente", ingrediente);
+		model.addAttribute("piatti", ingrediente.getPiatti());
 		return "ingrediente.html";
 	}
 	
 	@GetMapping("/ingredienteForm")
 	public String getIngredienteForm(Model model) {
 		model.addAttribute("ingrediente", new Ingrediente());
+		model.addAttribute("piattiDisponibili", this.piattoService.findAll());
 		return "ingredienteForm.html";
 	}
 	
@@ -83,6 +89,7 @@ public class IngredienteController {
 	public String updateIngrediente(@RequestParam Long ingredienteId, Model model) {
 		System.out.println("L'id dell'ingrediente: " + ingredienteId);
 		model.addAttribute("ingrediente", this.ingredienteService.findById(ingredienteId));
+		model.addAttribute("piattiDisponibili", this.piattoService.findAll());
 		return "ingredienteUpdateForm.html";
 	}
 }
