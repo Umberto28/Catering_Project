@@ -24,7 +24,7 @@ public class Buffet {
 	@NotBlank
 	private String descrizione;
 	
-	@OneToMany(mappedBy="buffet", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+	@OneToMany(mappedBy="buffet", cascade = {CascadeType.ALL})
 	private List<Piatto> listaPiatti;
 	
 	@ManyToOne

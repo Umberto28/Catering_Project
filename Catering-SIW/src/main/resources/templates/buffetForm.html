@@ -17,12 +17,7 @@
 				<div class="carousel-item active">
 					<img th:src="@{/images/sfondoElencoBuffet.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
 					<div id="home-section" class="carousel-caption">
-						<p> <span id="title" class="colorTitles">Buffet</span>
-						<br>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-						<br>
-						Deleniti ducimus earum illo cum vitae consequatur.
-						</p>
+						<p><span id="title" class="colorTitles">Buffet</span></p>
 					</div>
 				</div>
 			</div>
@@ -67,7 +62,7 @@
                                             <div class="form-group">
                                                 <label for="form_name">Seleziona chef</label>
                                                 <div th:if="${!chefDisponibili.empty}">
-                                                    <select class="form-select" aria-label="Default select example" th:field="*{chefDelBuffet}">
+                                                    <select name="chefScelto" class="form-select" aria-label="Default select example">
                                                         <option th:each="chef : ${chefDisponibili}" th:value="${chef.id}"><span
                                                                 th:text="${chef.nome}">Nome chef</span></option>
                                                     </select>

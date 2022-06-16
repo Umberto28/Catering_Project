@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.controller.validator.PiattoValidator;
+import com.example.demo.model.Buffet;
 import com.example.demo.model.Piatto;
 import com.example.demo.service.BuffetService;
 import com.example.demo.service.IngredienteService;
@@ -34,13 +35,18 @@ public class PiattoController {
 	PiattoValidator piattoValidator;
 	
 	@PostMapping("/piatto")
-	public String addPiatto(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
+	public String addPiatto(@Valid @ModelAttribute("piatto") Piatto piatto, @RequestParam(name = "buffetScelto") Long id, BindingResult bindingResult, Model model) {
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			//piatto.getBuffet().getListaPiatti().add(piatto);
-			this.piattoService.inserisci(piatto);
+			Buffet buffet = this.buffetService.findById(id);
+			piatto.setBuffet(buffet);
+			buffet.getListaPiatti().add(piatto);
+			
+			this.buffetService.inserisci(buffet);
+			
 			model.addAttribute("piatto", piatto);
 			model.addAttribute("buffet", piatto.getBuffet());
+			model.addAttribute("ingredientiDelPiatto", piatto.getIngredientiDelPiatto());
 			return "piatto.html";
 		}
 		else {
@@ -55,6 +61,7 @@ public class PiattoController {
 			this.piattoService.inserisci(piatto);
 			model.addAttribute("piatto", piatto);
 			model.addAttribute("buffet", piatto.getBuffet());
+			model.addAttribute("ingredientiDelPiatto", piatto.getIngredientiDelPiatto());
 			return "piatto.html";
 		}
 		else {
@@ -74,6 +81,7 @@ public class PiattoController {
 		Piatto piatto = this.piattoService.findById(id);
 		model.addAttribute("piatto", piatto);
 		model.addAttribute("buffet", piatto.getBuffet());
+		model.addAttribute("ingredientiDelPiatto", piatto.getIngredientiDelPiatto());
 		return "piatto.html";
 	}
 	
@@ -93,10 +101,8 @@ public class PiattoController {
 	
 	@GetMapping("/updatePiatto")
 	public String updatePiattoForm(@RequestParam Long piattoId, Model model) {
-		System.out.println("L'id del piatto: " + piattoId);
 		model.addAttribute("piatto", this.piattoService.findById(piattoId));
 		model.addAttribute("buffetDisponibili", this.buffetService.findAll());
-		model.addAttribute("ingredientiDisponibili", this.ingredienteService.findAll());
 		return "piattoUpdateForm.html";
 	}
 }

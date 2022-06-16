@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.controller.validator.BuffetValidator;
 import com.example.demo.model.Buffet;
+import com.example.demo.model.Chef;
 import com.example.demo.service.BuffetService;
 import com.example.demo.service.ChefService;
 
@@ -31,12 +32,18 @@ public class BuffetController {
 	private BuffetValidator buffetValidator;
 	
 	@PostMapping("/buffet")
-	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
+	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, @RequestParam(name = "chefScelto") Long id, BindingResult bindingResult, Model model) {
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			//buffet.getChefDelBuffet().getBuffetDelloChef().add(buffet);
-			this.buffetService.inserisci(buffet);
+			Chef chef = this.chefService.findById(id);
+			buffet.setChefDelBuffet(chef);
+			
+			chef.getBuffetDelloChef().add(buffet);
+			this.chefService.inserisci(chef);
+			
 			model.addAttribute("buffet", buffet);
+			model.addAttribute("listaPiatti", buffet.getListaPiatti());
+			model.addAttribute("chef", buffet.getChefDelBuffet());
 			return "buffet.html";
 		}
 		else {
@@ -50,6 +57,8 @@ public class BuffetController {
 		if(!bindingResult.hasErrors()) {
 			this.buffetService.inserisci(buffet);
 			model.addAttribute("buffet", buffet);
+			model.addAttribute("listaPiatti", buffet.getListaPiatti());
+			model.addAttribute("chef", buffet.getChefDelBuffet());
 			return "buffet.html";
 		}
 		else {
@@ -68,7 +77,7 @@ public class BuffetController {
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
 		Buffet buffet = this.buffetService.findById(id);
 		model.addAttribute("buffet", buffet);
-		model.addAttribute("elencoPiattiBuffet", buffet.getListaPiatti());
+		model.addAttribute("listaPiatti", buffet.getListaPiatti());
 		model.addAttribute("chef", buffet.getChefDelBuffet());
 		return "buffet.html";
 	}
@@ -88,7 +97,6 @@ public class BuffetController {
 	
 	@GetMapping("/updateBuffet")
 	public String updateBuffet(@RequestParam Long buffetId, Model model) {
-		System.out.println("L'id del buffet: " + buffetId);
 		model.addAttribute("buffet", this.buffetService.findById(buffetId));
 		model.addAttribute("chefDisponibili", this.chefService.findAll());
 		return "buffetUpdateForm.html";

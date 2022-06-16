@@ -36,6 +36,7 @@ public class ChefController {
 		if(!bindingResult.hasErrors()) {
 			this.chefService.inserisci(chef);
 			model.addAttribute("chef", chef);
+			model.addAttribute("buffetDelloChef", chef.getBuffetDelloChef());
 			return "chef.html";
 		}
 		else {
@@ -49,6 +50,7 @@ public class ChefController {
 		if(!bindingResult.hasErrors()) {
 			this.chefService.inserisci(chef);
 			model.addAttribute("chef", chef);
+			model.addAttribute("buffetDelloChef", chef.getBuffetDelloChef());
 			return "chef.html";
 		}
 		else {
@@ -67,7 +69,7 @@ public class ChefController {
 	public String getChef(@PathVariable("id") Long id, Model model) {
 		Chef chef = this.chefService.findById(id);
 		model.addAttribute("chef", chef);
-		model.addAttribute("elencoBuffetChef", chef.getBuffetDelloChef());
+		model.addAttribute("buffetDelloChef", chef.getBuffetDelloChef());
 		return "chef.html";
 	}
 	
@@ -85,7 +87,6 @@ public class ChefController {
 	
 	@GetMapping("/updateChef")
 	public String updateChef(@RequestParam Long chefId, Model model) {
-		System.out.println("L'id dello chef: " + chefId);
 		model.addAttribute("chef", this.chefService.findById(chefId));
 		return "chefUpdateForm.html";
 	}

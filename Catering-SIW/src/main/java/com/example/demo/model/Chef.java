@@ -25,7 +25,7 @@ public class Chef {
 	
 	private String nazionalita;
 	
-	@OneToMany(mappedBy="chefDelBuffet", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+	@OneToMany(mappedBy="chefDelBuffet", cascade = {CascadeType.ALL})
 	private List<Buffet> buffetDelloChef;
 	
 	

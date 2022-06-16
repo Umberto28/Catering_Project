@@ -17,12 +17,7 @@
 				<div class="carousel-item active">
 					<img th:src="@{/images/sfondoElencoPiatti.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
 					<div id="home-section" class="carousel-caption">
-						<p> <span id="title" class="colorTitles">Piatti</span>
-						<br>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-						<br>
-						Deleniti ducimus earum illo cum vitae consequatur.
-						</p>
+						<p><span id="title" class="colorTitles">Piatti</span></p>
 					</div>
 				</div>
 			</div>
@@ -65,28 +60,28 @@
                                             <div class="col-12 mt-3">
                                                 <div class="form-group">
                                                     <label for="form_name">Seleziona buffet</label>
-                                                    <div th:if="${buffetDisponibili}">
-                                                        <select class="form-select" aria-label="Default select example" th:field="*{buffet}">
+                                                    <div th:if="${!buffetDisponibili.empty}">
+                                                        <select name="buffetScelto" class="form-select" aria-label="Default select example">
                                                             <option th:each="buffet : ${buffetDisponibili}" th:value="${buffet.id}"><span
-                                                                    th:text="${buffet.nome}">Nome piatto</span></option>
+                                                                    th:text="${buffet.nome}">Nome buffet</span></option>
                                                         </select>
                                                     </div>
-                                                    <div th:unless="${buffetDisponibili}">
-                                                        <div class="notification p-3 is-danger">Nessun piatto disponibile!</div>
+                                                    <div th:unless="${!buffetDisponibili.empty}">
+                                                        <div class="notification p-3 is-danger">Nessun buffet disponibile!</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 mt-3">
+                                            <!--<div class="col-12 mt-3">
                                                 <div class="form-group">
                                                     <label for="form_name">Seleziona ingredienti</label>
                                                     <br>
                                                     <th:block th:each="ingrediente : ${ingredientiDisponibili}">
                                                         <div>
-                                                            <input class="form-control m-2" name="ingredienti" type="checkbox" th:field="*{ingredientiDelPiatto}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}" />
+                                                            <input class="form-control m-2" th:name="ingredienti" type="checkbox" th:field="*{ingredientiDelPiatto}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}" />
                                                         </div>
                                                     </th:block>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-md-12">

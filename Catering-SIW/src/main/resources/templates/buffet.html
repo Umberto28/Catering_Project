@@ -17,12 +17,7 @@
 				<div class="carousel-item active">
 					<img th:src="@{/images/sfondoElencoBuffet.jpg}" class="d-block" height="500" width="1920" alt="home image" style="object-fit: cover;">
 					<div id="home-section" class="carousel-caption">
-						<p> <span id="title" class="colorTitles">Buffet</span>
-						<br>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-						<br>
-						Deleniti ducimus earum illo cum vitae consequatur.
-						</p>
+						<p><span id="title" class="colorTitles">Buffet</span></p>
 					</div>
 				</div>
 			</div>
@@ -53,29 +48,33 @@
                                 </div>
                                 <img class="rounded-circle" style="background-color: rgb(235, 183, 87);" th:src="@{/images/buffetIcon5.png}" alt="Buffet">
                             </div>
-                            <div class="card bg-light col-6 my-5 ml-3">
-                                <div class="card-body d-flex flex-row align-items-center justify-content-between" th:if="${chef}" th:object="${chef}">
-                                    <div><h4 class="colorTitles d-inline">Chef: </h4><h4 class="d-inline" th:text="*{nome}">Chef</h4></div>
-                                    <a href="chef.html" class ="link btn"
-                                    th:href="@{'/chef' + '/' + ${chef.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
+                            <div class="p-3">
+                                <h4 class="colorTitles">Chef: </h4>
+                                <div class="card bg-light col-5 my-4 ml-3">
+                                    <div class="card-body d-flex flex-row align-items-center justify-content-between" th:if="${chef}" th:object="${chef}">
+                                        <div class="col-10"><h4 th:text="*{nome}">Chef</h4></div>
+                                        <a href="chef.html" class ="link btn"
+                                        th:href="@{'/chef' + '/' + ${chef.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
+                                    </div>
+                                    <h4 th:unless="${chef}" class="p-3">Nessuno chef assegnato</h4>
                                 </div>
-                                <h4 th:unless="${chef}" class="p-3">Nessuno chef assegnato</h4>
                             </div>
-                            <!--<div th:if="@{elencoPiattiBuffet}" class="p-3">
+                            
+                            <div th:if="@{listaPiatti}" class="p-3">
                                 <h4 class="colorTitles">Lista piatti: </h4>
                                 <div class="d-flex flex-wrap justify-content-start">
-                                    <div th:each="piatto : ${elencoPiattiBuffet}">
+                                    <div th:each="piatto : ${listaPiatti}">
                                         <div class="card bg-ligth m-3" style="width: 15rem;">
                                             <div class="card-body d-flex flex-row align-items-center justify-content-between">
-                                                <h5 th:text="${piatto.nome}">Nome piatto</h5>
+                                                <h4 class="col-10" th:text="${piatto.nome}">Nome piatto</h4>
                                                 <a href="piatto.html" class ="link btn"
                                                 th:href="@{'/piatto' + '/' + ${piatto.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>-->
-                            <h4 th:unless="@{elencoPiattiBuffet}">Non ci sono piatti assegnati</h4>
+                            </div>
+                            <h4 th:unless="@{listaPiatti}">Non ci sono piatti assegnati</h4>
                         </div>   
                     </div>
                     <h4 class="mx-auto" th:unless="${buffet}">Non esiste</h4>
