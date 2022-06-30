@@ -23,16 +23,21 @@
                 </div>
             </div>
         </div>
+        <div sec:authorize="hasAnyAuthority('ADMIN')" class="mx-5 mt-5 p-2">
+            <div class="alert alert-success" role="alert">
+                <h3 class="alert-heading">Congratulazioni!</h3>
+                <hr>
+                <p style="font-size: 20px;">Hai effettuato l'accesso con i permessi di amministratore!</p>
+            </div>
+        </div>
 
         <!-- CHEF SECTION -->
         <div class="d-flex flex-row align-items-center justify-content-around m-5">
-            <div class="m-4 p-3 border-radius" style="text-align-last: left;border: 4px dashed rgb(235, 183, 87);">
+            <div class="m-4 p-3 border-radius" style="text-align-last: left;border: 4px dashed rgb(235, 183, 87);width: 25rem;">
                 <p>
                     <span class="section-title colorTitles">I nostri Chef</span>
                     <br>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    <br>
-                    elit. Numquam, alias!
+                    Scopri il nostro personale qualificato e tutte le loro creazioni!                    
                     <br>
                     <br>
                     <a class="colorTitles" th:href="@{/elencoChef}">Vedi tutti gli Chef ></a>
@@ -80,9 +85,8 @@
                     <p class="text-white">
                         <span class="section-title colorTitles">I Buffet degli Chef</span>
                         <br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quod 
-                        <br>
-                        quos animi consequatur facilis obcaecati quisquam quam ab maiores!
+                        Potrai scegliere, tra una vasta gamma di offerte, l'opzione che più si adatta
+                        <br> alle tue esigenze e ai tuoi eventi!
                         <br>
                         <br>
                         <a th:href="@{/elencoBuffet}" class="colorTitles">Vedi tutti i Buffet ></a>
@@ -101,12 +105,8 @@
                 <p>
                     <span class="section-title colorTitles">I nostri Prodotti</span>
                     <br>
-                    Lorem ipsum dolor sit amet consectetur adipisicing  
-                    <br>
-                    elit. Sint voluptas quod
-                    quos animi consequatur facilis obcaecati 
-                    <br>
-                    quisquam quam ab maiores!
+                    I piatti e i rispettivi prodotti selezionati
+                    <br> dal nostro personale sono di prima scelta! 
                     <br>
                     <br>
                     <a th:href="@{/elencoPiatti}" class="colorTitles">Vedi tutti i piatti ></a>

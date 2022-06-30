@@ -34,7 +34,7 @@ public class PiattoController {
 	@Autowired
 	PiattoValidator piattoValidator;
 	
-	@PostMapping("/piatto")
+	@PostMapping("/admin/piatto")
 	public String addPiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
 			@RequestParam(name = "buffetScelto") Long id,
 			BindingResult bindingResult, Model model) {
@@ -56,11 +56,12 @@ public class PiattoController {
 			return "piatto.html";
 		}
 		else {
+			model.addAttribute("buffetDisponibili", this.buffetService.findAll());
 			return "piattoForm.html";
 		}
 	}
 	
-	@PostMapping("/piattoUpdate/{id}")
+	@PostMapping("/admin/piattoUpdate/{id}")
 	public String updatePiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
 			@RequestParam(name = "buffetScelto") Long id,
 			BindingResult bindingResult, Model model) {
@@ -91,6 +92,7 @@ public class PiattoController {
 			return "piatto.html";
 		}
 		else {
+			model.addAttribute("buffetDisponibili", this.buffetService.findAll());
 			return "piattoUpdateForm.html";
 		}
 	}
@@ -111,7 +113,7 @@ public class PiattoController {
 		return "piatto.html";
 	}
 	
-	@GetMapping("/piattoForm")
+	@GetMapping("/admin/piattoForm")
 	public String getPiattoForm(Model model) {
 		model.addAttribute("piatto", new Piatto());
 		model.addAttribute("buffetDisponibili", this.buffetService.findAll());
@@ -119,13 +121,13 @@ public class PiattoController {
 		return "piattoForm.html";
 	}
 	
-	@GetMapping("/deletePiatto")
+	@GetMapping("/admin/deletePiatto")
 	public String deletePiatto(@RequestParam Long piattoId) {
 		this.piattoService.rimuovi(piattoId);
 		return "redirect:/elencoPiatti";
 	}
 	
-	@GetMapping("/updatePiatto")
+	@GetMapping("/admin/updatePiatto")
 	public String updatePiattoForm(@RequestParam Long piattoId, Model model) {
 		model.addAttribute("piatto", this.piattoService.findById(piattoId));
 		model.addAttribute("buffetDisponibili", this.buffetService.findAll());

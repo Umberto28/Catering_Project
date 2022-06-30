@@ -30,7 +30,7 @@ public class ChefController {
 	@Autowired
 	ChefValidator chefValidator;
 	
-	@PostMapping("/chef")
+	@PostMapping("/admin/chef")
 	public String addChef(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model) {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
@@ -44,7 +44,7 @@ public class ChefController {
 		}
 	}
 	
-	@PostMapping("/chefUpdate/{id}")
+	@PostMapping("/admin/chefUpdate/{id}")
 	public String updateChefForm(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model) {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
@@ -73,19 +73,19 @@ public class ChefController {
 		return "chef.html";
 	}
 	
-	@GetMapping("/chefForm")
+	@GetMapping("/admin/chefForm")
 	public String getChefForm(Model model) {
 		model.addAttribute("chef", new Chef());
 		return "chefForm.html";
 	}
 	
-	@GetMapping("/deleteChef")
+	@GetMapping("/admin/deleteChef")
 	public String deleteChef(@RequestParam Long chefId) {
 		this.chefService.rimuovi(chefId);
 		return "redirect:/elencoChef";
 	}
 	
-	@GetMapping("/updateChef")
+	@GetMapping("/admin/updateChef")
 	public String updateChef(@RequestParam Long chefId, Model model) {
 		model.addAttribute("chef", this.chefService.findById(chefId));
 		return "chefUpdateForm.html";

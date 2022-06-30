@@ -27,7 +27,7 @@
 		<div class="m-5 border-radius" style="border: 4px dashed rgb(235, 183, 87);">
 			<div class="p-3 d-flex flex-row align-items-center justify-content-between" >
 				<div class="colorTitles section-title">Elenco ingredienti</div>
-				<a th:href="@{/ingredienteForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
+				<a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin/ingredienteForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
 			</div>
 		</div>
 		

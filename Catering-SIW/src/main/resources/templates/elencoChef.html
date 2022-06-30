@@ -27,7 +27,7 @@
 		<div class="m-5 border-radius" style="border: 4px dashed rgb(235, 183, 87);">
 			<div class="p-3 d-flex flex-row align-items-center justify-content-between" >
 				<div class="colorTitles section-title">Elenco chef</div>
-				<a th:href="@{/chefForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
+				<a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin/chefForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
 			</div>
 		</div>
 		
@@ -39,8 +39,11 @@
 					th:text="${buffet.nome} + ' ' + ${buffet.descrizione}">Paolo Rossi
 				</a> -->
 				<div class="card card-obj m-5" style="width: 18rem;background-color: rgb(112, 102, 80);">
-					<div class="card-header d-flex flex-row justify-content-between align-items-start mb-3">
-						<h4 class="card-title colorTitles" th:text="${chef.nome} + ' ' + ${chef.cognome}">Chef</h4>
+					<div class="card-header d-flex flex-row justify-content-between align-items-center mb-3">
+						<div>
+							<h4 class="card-title colorTitles" th:text="${chef.nome}">Chef</h4>
+							<h4 class="card-title colorTitles" th:text="${chef.cognome}">Chef</h4>
+						</div>						
 						<img th:src="@{/images/chefIcon2.png}" alt="Chef icon" class="rounded-circle" style="background-color: rgb(235, 183, 87);">
 					</div>
 					<div class="card-body text-white">

@@ -37,7 +37,7 @@
                     <div class="card mt-2 mx-auto p-4 bg-light">
                         <div class="card-body bg-light">
                             <div class = "container">
-                                <form id="contact-form" role="form" th:action="@{/chef}" method="POST" th:object="${chef}">
+                                <form id="contact-form" role="form" th:action="@{/admin/chef}" method="POST" th:object="${chef}">
                                     <div th:if="${#fields.hasGlobalErrors()}">
                                         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore Globale</p>
                                     </div>

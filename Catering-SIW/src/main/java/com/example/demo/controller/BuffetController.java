@@ -31,7 +31,7 @@ public class BuffetController {
 	@Autowired
 	private BuffetValidator buffetValidator;
 	
-	@PostMapping("/buffet")
+	@PostMapping("/admin/buffet")
 	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, 
 			@RequestParam(name = "chefScelto") Long id, 
 			BindingResult bindingResult, Model model) {
@@ -53,11 +53,12 @@ public class BuffetController {
 			return "buffet.html";
 		}
 		else {
+			model.addAttribute("chefDisponibili", this.chefService.findAll());
 			return "buffetForm.html";
 		}
 	}
 	
-	@PostMapping("/buffetUpdate/{id}")
+	@PostMapping("/admin/buffetUpdate/{id}")
 	public String updateBuffetForm(@Valid @ModelAttribute("buffet") Buffet buffet,
 			@RequestParam(name = "chefScelto") Long id,
 			BindingResult bindingResult, Model model) {
@@ -86,6 +87,7 @@ public class BuffetController {
 			return "buffet.html";
 		}
 		else {
+			model.addAttribute("chefDisponibili", this.chefService.findAll());
 			return "buffetUpdateForm.html";
 		}
 	}
@@ -106,20 +108,20 @@ public class BuffetController {
 		return "buffet.html";
 	}
 	
-	@GetMapping("/buffetForm")
+	@GetMapping("/admin/buffetForm")
 	public String getBuffetForm(Model model) {
 		model.addAttribute("buffet", new Buffet());
 		model.addAttribute("chefDisponibili", this.chefService.findAll());
 		return "buffetForm.html";
 	}
 	
-	@GetMapping("/deleteBuffet")
+	@GetMapping("/admin/deleteBuffet")
 	public String deleteBuffet(@RequestParam Long buffetId) {
 		this.buffetService.rimuovi(buffetId);
 		return "redirect:/elencoBuffet";
 	}
 	
-	@GetMapping("/updateBuffet")
+	@GetMapping("/admin/updateBuffet")
 	public String updateBuffet(@RequestParam Long buffetId, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(buffetId));
 		model.addAttribute("chefDisponibili", this.chefService.findAll());

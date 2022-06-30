@@ -28,7 +28,7 @@
 			<div class="p-3 d-flex flex-row align-items-center justify-content-between" >
 				<div class="colorTitles section-title">Elenco buffet</div>
 				<div>
-					<a th:href="@{/buffetForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
+					<a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin/buffetForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
 				</div>
 				
 			</div>
