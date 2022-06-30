@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <link rel="stylesheet" th:href="@{/css/index2.css}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
-        <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css}" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         <title>Inserimento Piatto</title>
     </head>
     <body>
@@ -60,32 +60,21 @@
                                             <div class="col-12 mt-3">
                                                 <div class="form-group">
                                                     <label for="form_name">Seleziona buffet</label>
-                                                    <div th:if="${!buffetDisponibili.empty}">
-                                                        <select name="buffetScelto" class="form-select" aria-label="Default select example">
+                                                    <div th:if="${buffetDisponibili}">
+                                                        <select name="buffetScelto" class="form-control" aria-label="Default select example">
                                                             <option th:each="buffet : ${buffetDisponibili}" th:value="${buffet.id}"><span
                                                                     th:text="${buffet.nome}">Nome buffet</span></option>
                                                         </select>
                                                     </div>
-                                                    <div th:unless="${!buffetDisponibili.empty}">
-                                                        <div class="notification p-3 is-danger">Nessun buffet disponibile!</div>
+                                                    <div th:unless="${buffetDisponibili}">
+                                                        <div class="notification p-3 is-danger">Nessun buffet disponibile!<a th:href="@{/buffetForm}" class="text-dark">Aggiungilo qui!</a></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--<div class="col-12 mt-3">
-                                                <div class="form-group">
-                                                    <label for="form_name">Seleziona ingredienti</label>
-                                                    <br>
-                                                    <th:block th:each="ingrediente : ${ingredientiDisponibili}">
-                                                        <div>
-                                                            <input class="form-control m-2" th:name="ingredienti" type="checkbox" th:field="*{ingredientiDelPiatto}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}" />
-                                                        </div>
-                                                    </th:block>
-                                                </div>
-                                            </div>-->
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn btn-send pt-2 btn-block text-dark"><img th:src="@{/images/confermaIcon.png}" alt="Conferma"></button>
+                                                <button type="submit" class="btn btn-send pt-2 btn-block text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/confermaIcon.png}" alt="Conferma"></button>
                                             </div>
                                         </div>
                                     </div>

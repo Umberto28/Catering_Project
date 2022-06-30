@@ -32,13 +32,19 @@ public class BuffetController {
 	private BuffetValidator buffetValidator;
 	
 	@PostMapping("/buffet")
-	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, @RequestParam(name = "chefScelto") Long id, BindingResult bindingResult, Model model) {
+	public String addBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, 
+			@RequestParam(name = "chefScelto") Long id, 
+			BindingResult bindingResult, Model model) {
+		
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			
 			Chef chef = this.chefService.findById(id);
+			
 			buffet.setChefDelBuffet(chef);
 			
 			chef.getBuffetDelloChef().add(buffet);
+			
 			this.chefService.inserisci(chef);
 			
 			model.addAttribute("buffet", buffet);
@@ -52,10 +58,28 @@ public class BuffetController {
 	}
 	
 	@PostMapping("/buffetUpdate/{id}")
-	public String updateBuffetForm(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
+	public String updateBuffetForm(@Valid @ModelAttribute("buffet") Buffet buffet,
+			@RequestParam(name = "chefScelto") Long id,
+			BindingResult bindingResult, Model model) {
+		
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.buffetService.inserisci(buffet);
+			Chef CNuovo = this.chefService.findById(id);
+			Chef CVecchio = buffet.getChefDelBuffet();
+			
+			if(CVecchio != null) {
+				for(Buffet bInList : CVecchio.getBuffetDelloChef()) {
+					if(bInList.getId() == buffet.getId()) {
+						CVecchio.getBuffetDelloChef().remove(bInList);
+					}
+				}
+			}
+			
+			buffet.setChefDelBuffet(CNuovo);
+			CNuovo.getBuffetDelloChef().add(buffet);
+			
+			this.chefService.inserisci(CNuovo);
+			
 			model.addAttribute("buffet", buffet);
 			model.addAttribute("listaPiatti", buffet.getListaPiatti());
 			model.addAttribute("chef", buffet.getChefDelBuffet());

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<title>Elenco Buffet</title>
 		<link rel="stylesheet" th:href="@{/css/index2.css}">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
-		<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css}" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 	</head>
 	<body>
 		<!-- NAVBAR SECTION -->
@@ -27,7 +28,7 @@
 			<div class="p-3 d-flex flex-row align-items-center justify-content-between" >
 				<div class="colorTitles section-title">Elenco buffet</div>
 				<div>
-					<a th:href="@{/buffetForm}" class="btn text-dark">Aggiungi buffet</a>
+					<a th:href="@{/buffetForm}" class="btn text-dark" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/addIcon.png}" alt="Add"></a>
 				</div>
 				
 			</div>
@@ -36,7 +37,7 @@
 		<!-- LIST SECTION -->
 		<div class="d-flex flex-wrap justify-content-around">
 			<div th:each="buffet : ${elencoBuffet}">
-				<div class="card m-5" style="width: 18rem;background-color: rgb(112, 102, 80);">
+				<div class="card card-obj m-5" style="width: 18rem;background-color: rgb(112, 102, 80);">
 					<div class="card-header d-flex flex-row justify-content-between align-items-center mb-3">
 						<h4 class="card-title colorTitles" th:text="${buffet.nome}">Buffet</h4>
 						<img th:src="@{/images/buffetIcon4.png}" alt="Buffet icon" class="rounded-circle" style="background-color: rgb(235, 183, 87);">
@@ -45,7 +46,7 @@
 						<p  class="pb-2" th:text="${buffet.descrizione}">Descrizione</p>
 						<div style="width: 50%;">
 							<a href="buffet.html" class ="link btn btn-outline btn-block"
-						th:href="@{'/buffet' + '/' + ${buffet.id}}"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
+						th:href="@{'/buffet' + '/' + ${buffet.id}}" style="background-color: rgb(235, 183, 87);"><img th:src="@{/images/dettagliIcon.png}" alt="Dettagli"></a>
 						</div>
 					</div>
 				</div>

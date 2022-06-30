@@ -32,11 +32,18 @@ public class IngredienteController {
 	IngredienteValidator ingredienteValidator;
 	
 	@PostMapping("/ingrediente")
-	public String addIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, @RequestParam(name = "piattoScelto") Long id, BindingResult bindingResult, Model model) {
+	public String addIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
+			@RequestParam(name = "piattoScelto") Long id,
+			BindingResult bindingResult,
+			Model model) {
+		
 		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			
 			Piatto piatto = this.piattoService.findById(id);
+			
 			ingrediente.setPiatto(piatto);
+			
 			piatto.getIngredientiDelPiatto().add(ingrediente);
 			
 			this.piattoService.inserisci(piatto);
@@ -51,9 +58,30 @@ public class IngredienteController {
 	}
 	
 	@PostMapping("/ingredienteUpdate/{id}")
-	public String updateIngredienteForm(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult, Model model) {
+	public String updateIngredienteForm(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
+			@RequestParam(name = "piattoScelto") Long id,
+			BindingResult bindingResult,
+			Model model) {
+		
 		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			
+			Piatto PNuovo = this.piattoService.findById(id);
+			Piatto PVecchio = ingrediente.getPiatto();
+			
+			if(PVecchio != null) {
+				for(Ingrediente iInList : PVecchio.getIngredientiDelPiatto()) {
+					if(iInList.getId() == ingrediente.getId()) {
+						PVecchio.getIngredientiDelPiatto().remove(iInList);
+					}
+				}
+			}
+			
+			ingrediente.setPiatto(PNuovo);
+			PNuovo.getIngredientiDelPiatto().add(ingrediente);
+			
+			this.piattoService.inserisci(PNuovo);
+			
 			this.ingredienteService.inserisci(ingrediente);
 			model.addAttribute("ingrediente", ingrediente);
 			model.addAttribute("piatto", ingrediente.getPiatto());

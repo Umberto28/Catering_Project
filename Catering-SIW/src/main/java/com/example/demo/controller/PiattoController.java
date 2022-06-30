@@ -35,11 +35,17 @@ public class PiattoController {
 	PiattoValidator piattoValidator;
 	
 	@PostMapping("/piatto")
-	public String addPiatto(@Valid @ModelAttribute("piatto") Piatto piatto, @RequestParam(name = "buffetScelto") Long id, BindingResult bindingResult, Model model) {
+	public String addPiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
+			@RequestParam(name = "buffetScelto") Long id,
+			BindingResult bindingResult, Model model) {
+		
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			
 			Buffet buffet = this.buffetService.findById(id);
+			
 			piatto.setBuffet(buffet);
+			
 			buffet.getListaPiatti().add(piatto);
 			
 			this.buffetService.inserisci(buffet);
@@ -55,9 +61,29 @@ public class PiattoController {
 	}
 	
 	@PostMapping("/piattoUpdate/{id}")
-	public String updatePiatto(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
+	public String updatePiatto(@Valid @ModelAttribute("piatto") Piatto piatto,
+			@RequestParam(name = "buffetScelto") Long id,
+			BindingResult bindingResult, Model model) {
+		
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			
+			Buffet BNuovo = this.buffetService.findById(id);
+			Buffet BVecchio = piatto.getBuffet();
+			
+			if(BVecchio != null) {
+				for(Piatto pInList : BVecchio.getListaPiatti()) {
+					if(pInList.getId() == piatto.getId()) {
+						BVecchio.getListaPiatti().remove(pInList);
+					}
+				}
+			}
+			
+			piatto.setBuffet(BNuovo);
+			BNuovo.getListaPiatti().add(piatto);
+			
+			this.buffetService.inserisci(BNuovo);
+			
 			this.piattoService.inserisci(piatto);
 			model.addAttribute("piatto", piatto);
 			model.addAttribute("buffet", piatto.getBuffet());

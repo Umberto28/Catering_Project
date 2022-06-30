@@ -48,10 +48,24 @@ a:link {
     box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.btn {
-    background-color: rgb(235, 183, 87);
+.bgColor {
+    background-color: #ebb757;
+}
+
+.btn:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .colorTitles {
-    color: rgb(235, 183, 87);
+    color: #ebb757;
+}
+
+.card-obj {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all .5s;
+}
+
+.card-obj:hover {
+    transform: scale(1.1);
+    transition: all .5s;
 }
