@@ -29,7 +29,7 @@
 			<div class="p-3 d-flex flex-row align-items-center justify-content-between">
 				<div class="colorTitles section-title">Dettagli Piatto</div>
                 <div>
-                    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin/updatePiatto(piattoId=${piatto.id})}" class="btn btn-primary"><img th:src="@{/images/modificaIcon.png}" alt="Modifica"></a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{'/admin/updatePiatto' + '/' + ${piatto.id}}" class="btn btn-primary"><img th:src="@{/images/modificaIcon.png}" alt="Modifica"></a>
                     <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin/deletePiatto(piattoId=${piatto.id})}" class="btn btn-danger"><img th:src="@{/images/deleteIcon.png}" alt="Delete"></a>
                 </div>
 			</div>

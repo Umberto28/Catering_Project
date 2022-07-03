@@ -116,9 +116,9 @@ public class PiattoController {
 	
 	@GetMapping("/admin/piattoForm")
 	public String getPiattoForm(Model model) {
-		model.addAttribute("piatto", new Piatto());
+		Piatto piatto = new Piatto();
+		model.addAttribute("piatto", piatto);
 		model.addAttribute("buffetDisponibili", this.buffetService.findAll());
-		model.addAttribute("ingredientiDisponibili", this.ingredienteService.findAll());
 		return "piattoForm.html";
 	}
 	
@@ -128,9 +128,10 @@ public class PiattoController {
 		return "redirect:/elencoPiatti";
 	}
 	
-	@GetMapping("/admin/updatePiatto")
-	public String updatePiattoForm(@RequestParam Long piattoId, Model model) {
-		model.addAttribute("piatto", this.piattoService.findById(piattoId));
+	@GetMapping("/admin/updatePiatto/{id}")
+	public String updatePiattoForm(@PathVariable("id") Long piattoId, Model model) {
+		Piatto piatto = this.piattoService.findById(piattoId);
+		model.addAttribute("piatto", piatto);
 		model.addAttribute("buffetDisponibili", this.buffetService.findAll());
 		return "piattoUpdateForm.html";
 	}
