@@ -18,7 +18,9 @@ public class ChefService {
 	
 	public boolean alreadyExists(Chef chef) {
 		if(this.chefRepository.findByNomeAndCognome(chef.getNome(), chef.getCognome()) != null) {
-			return true;
+			if(this.chefRepository.findByNomeAndCognome(chef.getNome(), chef.getCognome()).getId() != chef.getId()) {
+				return true;
+			}
 		}
 		return false;
 	}

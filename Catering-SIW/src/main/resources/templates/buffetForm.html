@@ -61,14 +61,17 @@
                                         <div class="col-12 mt-3">
                                             <div class="form-group">
                                                 <label for="form_name">Seleziona chef</label>
-                                                <div th:if="${chefDisponibili}">
+                                                <div th:if="${!chefDisponibili.empty}">
                                                     <select name="chefScelto" class="form-control" aria-label="Default select example">
                                                         <option th:each="chef : ${chefDisponibili}" th:value="${chef.id}"><span
                                                                 th:text="${chef.nome}">Nome chef</span></option>
                                                     </select>
                                                 </div>
-                                                <div th:unless="${chefDisponibili}">
-                                                    <div class="notification p-3 is-danger">Nessuno chef disponibile! <a th:href="@{/chefForm}" class="text-dark">Aggiungilo qui!</a></div>
+                                                <div th:unless="${!chefDisponibili.empty}">
+                                                    <select name="chefScelto" class="form-control" aria-label="Default select example">
+                                                        <option th:value="${-1}"></option>
+                                                    </select>
+                                                    <div class="notification p-3 is-danger">Nessuno chef disponibile! <a th:href="@{/admin/chefForm}" class="text-dark">Aggiungilo qui!</a></div>
                                                 </div>
                                             </div>
                                         </div>

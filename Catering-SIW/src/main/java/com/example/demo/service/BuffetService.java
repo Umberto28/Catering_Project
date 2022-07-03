@@ -18,7 +18,9 @@ public class BuffetService {
 	
 	public boolean alreadyExists(Buffet buffet) {
 		if(this.buffetRepository.findByNome(buffet.getNome()) != null) {
-			return true;
+			if(this.buffetRepository.findByNome(buffet.getNome()).getId() != buffet.getId()) {
+				return true;
+			}
 		}
 		return false;
 	}

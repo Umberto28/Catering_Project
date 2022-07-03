@@ -25,4 +25,10 @@ public class BuffetValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		return Buffet.class.equals(clazz);
 	}
+	
+	public void valC(Long id, Errors errors) {
+		if(id < 0) {
+			errors.reject("NotNull.buffet.chefDelBuffet");
+		}
+	}
 }

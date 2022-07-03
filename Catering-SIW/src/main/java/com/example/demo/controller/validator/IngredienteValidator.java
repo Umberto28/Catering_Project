@@ -26,4 +26,10 @@ public class IngredienteValidator implements Validator{
 		}
 	}
 	
+	public void valP(Long id, Errors errors) {
+		if(id < 0) {
+			errors.reject("NotNull.ingrediente.piatto");
+		}
+	}
+	
 }

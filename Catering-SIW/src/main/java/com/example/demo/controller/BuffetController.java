@@ -36,7 +36,9 @@ public class BuffetController {
 			@RequestParam(name = "chefScelto") Long id, 
 			BindingResult bindingResult, Model model) {
 		
+		this.buffetValidator.valC(id, bindingResult);
 		this.buffetValidator.validate(buffet, bindingResult);
+		
 		if(!bindingResult.hasErrors()) {
 			
 			Chef chef = this.chefService.findById(id);
@@ -52,10 +54,9 @@ public class BuffetController {
 			model.addAttribute("chef", buffet.getChefDelBuffet());
 			return "buffet.html";
 		}
-		else {
-			model.addAttribute("chefDisponibili", this.chefService.findAll());
-			return "buffetForm.html";
-		}
+		model.addAttribute("buffet", buffet);
+		model.addAttribute("chefDisponibili", this.chefService.findAll());
+		return "buffetForm.html";
 	}
 	
 	@PostMapping("/admin/buffetUpdate/{id}")
@@ -86,10 +87,9 @@ public class BuffetController {
 			model.addAttribute("chef", buffet.getChefDelBuffet());
 			return "buffet.html";
 		}
-		else {
-			model.addAttribute("chefDisponibili", this.chefService.findAll());
-			return "buffetUpdateForm.html";
-		}
+		model.addAttribute("buffet", buffet);
+		model.addAttribute("chefDisponibili", this.chefService.findAll());
+		return "buffetUpdateForm.html";
 	}
 	
 	@GetMapping("/elencoBuffet")

@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" th:href="@{/css/index2.css}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
-        <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css}" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster Two">
+		<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css}" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         <title>Inserimento Ingrediente</title>
     </head>
     <body>
@@ -68,14 +68,17 @@
                                         <div class="col-12 mt-3">
                                             <div class="form-group">
                                                 <label for="form_name">Seleziona piatto</label>
-                                                <div th:if="${piattiDisponibili}">
+                                                <div th:if="${!piattiDisponibili.empty}">
                                                     <select name="piattoScelto" class="form-control" aria-label="Default select example">
                                                         <option th:each="piatto : ${piattiDisponibili}" th:value="${piatto.id}"><span
                                                                 th:text="${piatto.nome}">Nome piatto</span></option>
                                                     </select>
                                                 </div>
-                                                <div th:unless="${piattiDisponibili}">
-                                                    <div class="notification p-3 is-danger">Nessun piatto disponibile!<a th:href="@{/piattoForm}" class="text-dark">Aggiungilo qui!</a></div>
+                                                <div th:unless="${!piattiDisponibili.empty}">
+                                                    <select name="piattoScelto" class="form-control" aria-label="Default select example">
+                                                        <option th:value="${-1}"></option>
+                                                    </select>
+                                                    <div class="notification p-3 is-danger">Nessun piatto disponibile!<a th:href="@{/admin/piattoForm}" class="text-dark">Aggiungilo qui!</a></div>
                                                 </div>
                                             </div>
                                         </div>

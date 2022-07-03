@@ -18,7 +18,9 @@ public class PiattoService {
 	
 	public boolean alreadyExists(Piatto piatto) {
 		if(this.piattoRepository.findByNome(piatto.getNome()) != null) {
-			return true;
+			if(this.piattoRepository.findByNome(piatto.getNome()).getId() != piatto.getId()) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -37,6 +37,7 @@ public class IngredienteController {
 			BindingResult bindingResult,
 			Model model) {
 		
+		this.ingredienteValidator.valP(id, bindingResult);
 		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			

@@ -39,6 +39,7 @@ public class PiattoController {
 			@RequestParam(name = "buffetScelto") Long id,
 			BindingResult bindingResult, Model model) {
 		
+		this.piattoValidator.valB(id, bindingResult);
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			

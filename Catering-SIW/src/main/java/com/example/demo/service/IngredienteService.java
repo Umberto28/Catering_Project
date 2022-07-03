@@ -18,7 +18,9 @@ public class IngredienteService {
 	
 	public boolean alreadyExists(Ingrediente ingrediente) {
 		if(this.ingredienteRepository.findByNome(ingrediente.getNome()) != null) {
-			return true;
+			if(this.ingredienteRepository.findByNome(ingrediente.getNome()).getId() != ingrediente.getId()) {
+				return true;
+			}
 		}
 		return false;
 	}

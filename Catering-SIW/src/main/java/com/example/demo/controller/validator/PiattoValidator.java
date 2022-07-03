@@ -26,4 +26,10 @@ public class PiattoValidator implements Validator{
 		}
 	}
 	
+	public void valB(Long id, Errors errors) {
+		if(id < 0) {
+			errors.reject("NotNull.piatto.buffet");
+		}
+	}
+	
 }
