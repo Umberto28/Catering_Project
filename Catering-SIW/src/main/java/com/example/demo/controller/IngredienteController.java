@@ -49,9 +49,8 @@ public class IngredienteController {
 			
 			this.piattoService.inserisci(piatto);
 			
-			model.addAttribute("ingrediente", ingrediente);
-			model.addAttribute("piatto", ingrediente.getPiatto());
-			return "ingrediente.html";
+			model.addAttribute("elencoIngredienti", this.ingredienteService.findAll());
+			return "elencoIngredienti.html";
 		}
 		else {
 			model.addAttribute("piattiDisponibili", this.piattoService.findAll());

@@ -35,9 +35,9 @@ public class ChefController {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.chefService.inserisci(chef);
-			model.addAttribute("chef", chef);
-			model.addAttribute("buffetDelloChef", chef.getBuffetDelloChef());
-			return "chef.html";
+
+			model.addAttribute("elencoChef", this.chefService.findAll());
+			return "elencoChef.html";
 		}
 		else {
 			return "chefForm.html";

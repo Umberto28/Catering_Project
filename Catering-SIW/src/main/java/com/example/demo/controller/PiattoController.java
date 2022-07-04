@@ -51,10 +51,8 @@ public class PiattoController {
 			
 			this.buffetService.inserisci(buffet);
 			
-			model.addAttribute("piatto", piatto);
-			model.addAttribute("buffet", piatto.getBuffet());
-			model.addAttribute("ingredientiDelPiatto", piatto.getIngredientiDelPiatto());
-			return "piatto.html";
+			model.addAttribute("elencoPiatti", this.piattoService.findAll());
+			return "elencoPiatti.html";
 		}
 		else {
 			model.addAttribute("buffetDisponibili", this.buffetService.findAll());

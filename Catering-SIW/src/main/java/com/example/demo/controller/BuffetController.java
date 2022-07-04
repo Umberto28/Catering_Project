@@ -49,10 +49,8 @@ public class BuffetController {
 			
 			this.chefService.inserisci(chef);
 			
-			model.addAttribute("buffet", buffet);
-			model.addAttribute("listaPiatti", buffet.getListaPiatti());
-			model.addAttribute("chef", buffet.getChefDelBuffet());
-			return "buffet.html";
+			model.addAttribute("elencoBuffet", this.buffetService.findAll());
+			return "elencoBuffet.html";
 		}
 		model.addAttribute("buffet", buffet);
 		model.addAttribute("chefDisponibili", this.chefService.findAll());
