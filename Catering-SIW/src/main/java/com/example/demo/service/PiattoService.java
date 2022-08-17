@@ -32,7 +32,7 @@ public class PiattoService {
 		}
 		return elencoPiatti;
 	}
-		
+	
 	@Transactional
 	public Piatto findById(Long id) {
 		return this.piattoRepository.findById(id).get();

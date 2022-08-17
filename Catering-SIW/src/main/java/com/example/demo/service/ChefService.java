@@ -52,4 +52,8 @@ public class ChefService {
 	public void clear(Chef chef) {
 		this.chefRepository.deleteAll();
 	}
+	
+	public long contaChef() {
+		return this.chefRepository.count();
+	}
 }

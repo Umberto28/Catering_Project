@@ -90,4 +90,10 @@ public class ChefController {
 		model.addAttribute("chef", this.chefService.findById(chefId));
 		return "chefUpdateForm.html";
 	}
+	
+	@GetMapping("/")
+	public String index(Model model) {
+		model.addAttribute("numChef", this.chefService.contaChef());
+		return "index.html";
+	}
 }
